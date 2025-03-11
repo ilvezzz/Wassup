@@ -6,7 +6,7 @@ using System;
 using System.Windows;
 using WassupLib.Models;
 
-namespace PersonalTrainerApp.Models.Controllers
+namespace WassupLib.Managers
 {
     public static class FileManager
     {
