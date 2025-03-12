@@ -1,10 +1,9 @@
-﻿using WassupClient.Views.SubViews;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using WassupLib.Managers;
 
-namespace PersonalTrainerApp.ViewModels
+namespace WassupClient.ViewModels
 {
 	public class HomeViewModel : BaseViewModel
 	{

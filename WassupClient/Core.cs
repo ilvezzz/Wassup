@@ -1,9 +1,9 @@
-﻿using WassupLib.Models;
-using WassupLib.ViewModels;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using WassupLib.Models;
 using WassupLib.Managers;
+using WassupClient.ViewModels;
 
-namespace WassupLib
+namespace WassupClient
 {
     public class Core : INotifyPropertyChanged
 	{

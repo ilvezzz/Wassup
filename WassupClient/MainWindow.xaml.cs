@@ -24,6 +24,9 @@ namespace WassupClient
             this.DataContext = new Core();
         }
 
+        private void btnNewChat_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }

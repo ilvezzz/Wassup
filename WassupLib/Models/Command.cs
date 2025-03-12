@@ -10,8 +10,8 @@ namespace WassupLib.Models
     public class Command
     {
         public string Type { get; set; }
-        public string Content { get; set; }
-        public Command(string type, string content)
+        public object Content { get; set; }
+        public Command(string type, object content)
         {
             Type = type;
             Content = content;

@@ -15,7 +15,7 @@ namespace WassupLib.Models
     {
         #region Variables
 
-        private int _chatId;
+        private int _id;
         private User _user;
         private ObservableCollection<Message> _messages;
 
@@ -23,13 +23,14 @@ namespace WassupLib.Models
         #endregion
 
         #region Properties
-        public int ChatId
+
+        public int Id
         {
-            get { return _chatId; }
+            get { return _id; }
             set
             {
-                _chatId = value;
-                OnPropertyChanged(nameof(ChatId));
+                _id = value;
+                OnPropertyChanged(nameof(Id));
             }
         }
         public User User
@@ -64,7 +65,7 @@ namespace WassupLib.Models
         /// <param name="password">Password</param>
         public Chat(User user, ref int lastId)
         {
-            _chatId = ++lastId;
+            _id = ++lastId;
             _user = user;
 
             _messages = new ObservableCollection<Message>();
@@ -72,9 +73,23 @@ namespace WassupLib.Models
 
         #endregion
 
-        #region PropertyChanged
+        #region Methods
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public void SendMessage(string type, string content)
+        {
+
+        }
+
+		public void DeleteMessage(int messageId)
+		{
+
+		}
+
+		#endregion
+
+		#region PropertyChanged
+
+		public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string propertyName)
         {

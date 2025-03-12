@@ -11,11 +11,21 @@ namespace WassupLib.Models
     [Serializable]
     public class Message
     {
+        private int _id;
         private string _to; 
         private Type _type;
         private object _content;
 
-        public string To
+		public int Id
+		{
+			get { return _id; }
+			set
+			{
+				_id = value;
+				OnPropertyChanged(nameof(Id));
+			}
+		}
+		public string To
         {
             get { return _to; }
             set
@@ -43,8 +53,9 @@ namespace WassupLib.Models
             }
         }
 
-        public Message(string to, Type type, object content)
+        public Message(int id, string to, Type type, object content)
         {
+            _id = id;
             _to = to;
             _type = type;
             _content = content;

@@ -46,7 +46,7 @@ namespace WassupLib.Managers
             };
             thread.Start();
 
-            MessageBox.Show("Inserisci i messaggi da inviare al server (digita 'exit' per uscire):");
+            //MessageBox.Show("Inserisci i messaggi da inviare al server (digita 'exit' per uscire):");
 
             while (true)
             {

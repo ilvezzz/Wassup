@@ -1,4 +1,4 @@
-﻿namespace WassupLib.ViewModels
+﻿namespace WassupClient.ViewModels
 {
 	public class RegisterViewModel : BaseViewModel
 	{

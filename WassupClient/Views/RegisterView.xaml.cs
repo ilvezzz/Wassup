@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using WassupLib;
 using WassupLib.Managers;
-using WassupLib.ViewModels;
 
 namespace WassupClient.Views
 {

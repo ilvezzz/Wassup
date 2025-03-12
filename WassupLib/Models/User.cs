@@ -100,11 +100,25 @@ namespace WassupLib.Models
             _chats = new ObservableCollection<Chat>();
         }
 
-        #endregion
+		#endregion
 
-        #region PropertyChanged
+		#region Methods
 
-        public event PropertyChangedEventHandler PropertyChanged;
+		public void NewChat(User user, ref int lastId)
+		{
+
+		}
+
+		public void DeleteChat(int chatId)
+		{
+
+		}
+
+		#endregion
+
+		#region PropertyChanged
+
+		public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string propertyName)
         {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace WassupLib.ViewModels
+namespace WassupClient.ViewModels
 {
 	public class BaseViewModel : INotifyPropertyChanged
 	{
