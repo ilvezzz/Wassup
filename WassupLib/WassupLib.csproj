@@ -78,7 +78,8 @@
     <Compile Include="Managers\TcpManagerClient.cs" />
     <Compile Include="Managers\TcpManagerServer.cs" />
     <Compile Include="Models\Chat.cs" />
-    <Compile Include="Models\Command.cs" />
+    <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\Request.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,7 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
-using System.Threading.Tasks;
+using WassupLib.Models;
 
 namespace WassupLib.Managers
 {
@@ -16,101 +16,72 @@ namespace WassupLib.Managers
 		private string _ip;
 		private int _port;
 
+        public bool Connected { get; set; }
+
 		public TcpManagerClient(string ip = "127.0.0.1", int port = 12345)
         {
-            // TODO
+			// Prevents client from starting before server (hopefully)
+			Thread.Sleep(500);
+
 			_ip = ip;
             _port = port;
-        }
 
-        public void Connect()
-        {
-            try
-            {
-                _client = new TcpClient();
-                _client.Connect(_ip, _port);
-                _stream = _client.GetStream();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Errore nella connessione: " + ex.Message);
-            }
-        }
+            _client = new TcpClient();
+			_client.Connect(_ip, _port);
+			_stream = _client.GetStream();
 
-        public void Start()
-        {
-            // Avvia un thread in background per la ricezione dei messaggi
-            Thread thread = new Thread(ReceiveMessages)
-            {
-                IsBackground = true
-            };
-            thread.Start();
+			if (_client == null || _stream == null)
+				throw new Exception("Errore durante la creazione del client TCP");
+		}
 
-            //MessageBox.Show("Inserisci i messaggi da inviare al server (digita 'exit' per uscire):");
+		public Response ExecuteCommand(Request req, bool expectResponse = true)
+		{
+			// Serializes req into a json string
+			var jsonRequest = JsonSerializer.Serialize(req);
+			// Sends message in stream
+			byte[] data = Encoding.ASCII.GetBytes(jsonRequest);
+			_stream.Write(data, 0, data.Length);
 
-            while (true)
-            {
-                string input = Console.ReadLine();
-                if (input.ToLower() == "exit")
-                    break;
+			// If expects response, gets it
+			if (expectResponse)
+				return GetResponse();
 
-                // Costruisce un comando JSON con tipo "mess"
-                var command = new
-                {
-                    type = "mess",
-                    content = new
-                    {
-                        chatId = 1,
-                        messageType = "text",
-                        messageContent = input
-                    }
-                };
+			return null;
+		}
 
-                string jsonCommand = JsonSerializer.Serialize(command);
-                SendMessage(jsonCommand);
-            }
+		private Response GetResponse()
+		{
+			var receivedData = new List<byte>();
+			var buffer = new byte[1024];
 
-            // Chiude la connessione
-            _stream.Close();
-            _client.Close();
-        }
+			while (true)
+			{
+				// Read bytes
+				int bytesRead = _stream.Read(buffer, 0, 1024);
+				// No more bytes = message ended
+				if (bytesRead == 0) break;
+				// Adds bytes to list
+				receivedData.AddRange(buffer.Take(bytesRead));
+			}
 
-        private void SendMessage(string message)
-        {
-            try
-            {
-                byte[] data = Encoding.UTF8.GetBytes(message);
-                _stream.Write(data, 0, data.Length);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Errore durante l'invio del messaggio: " + ex.Message);
-            }
-        }
+			// No data received
+			if (receivedData.Count == 0)
+				return new Response(false, null);
 
-        private void ReceiveMessages()
-        {
-            byte[] buffer = new byte[1024];
-            try
-            {
-                while (true)
-                {
-                    int bytesRead = _stream.Read(buffer, 0, buffer.Length);
-                    if (bytesRead == 0)
-                    {
-                        Console.WriteLine("Connessione chiusa dal server.");
-                        break;
-                    }
+			// Bytes to json string
+			string jsonResponse = Encoding.ASCII.GetString(receivedData.ToArray());
 
-                    string response = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                    Console.WriteLine("Risposta dal server: " + response);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Errore durante la ricezione: " + ex.Message);
-            }
-        }
+			// Parses json response into an object & returns it
+			return JsonSerializer.Deserialize<Response>(jsonResponse);
+		}
 
+		//public void SendMessage(string username, int chatId, string type, string message)
+		//{
+		//	// Serializes into a json string
+		//	var jsonCommand = JsonSerializer.Serialize(new Command("mess", new { username = username, chatId = chatId, messageType = type, messageContent = message }));
+		//	// Sends message in stream
+		//	byte[] data = Encoding.ASCII.GetBytes(jsonCommand);
+		//	_stream.Write(data, 0, data.Length);
+		//}
     }
 }

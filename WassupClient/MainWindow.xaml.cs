@@ -21,8 +21,13 @@ namespace WassupClient
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new Core();
+			this.DataContext = new Core();
         }
+
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+            (this.DataContext as Core).LoadFirstView();
+		}
 
         private void btnNewChat_Click(object sender, RoutedEventArgs e)
         {

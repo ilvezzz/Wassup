@@ -14,17 +14,6 @@
                 <ResourceDictionary Source="Styles/LoginRegisterButtonStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <!-- DataTemplates -->
-            <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
-                <views:HomeView/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
-                <views:LoginView/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type viewmodels:RegisterViewModel}">
-                <views:RegisterView/>
-            </DataTemplate>
-
         </ResourceDictionary>
 
     </Application.Resources>

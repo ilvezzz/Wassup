@@ -38,7 +38,7 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="Button">
                                 <Grid>
-                                    <Ellipse Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Effect="{StaticResource ShadowEffect}"/>
+                                    <Ellipse Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"/>
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Grid>
                             </ControlTemplate>
@@ -54,7 +54,7 @@
             </Button.Style>
         </Button>
 
-        <ContentControl Name="ccChat" Grid.Row="1" Grid.Column="1" Content="{Binding SelectedViewModel}" />
+        <ContentControl Name="ccChat" Grid.Row="1" Grid.Column="1" Content="{Binding SelectedView}" />
 
     </Grid>
 </Window>

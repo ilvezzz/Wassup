@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace WassupLib.Models
 {
     [Serializable]
-    public class Command
+    public class Request
     {
         public string Type { get; set; }
         public object Content { get; set; }
-        public Command(string type, object content)
+        public Request(string type, object content)
         {
             Type = type;
             Content = content;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using WassupClient.ViewModels;
 using WassupLib;
 using WassupLib.Managers;
 
@@ -10,9 +11,9 @@ namespace WassupClient.Views
 {
     public partial class LoginView : UserControl
     {
-        public LoginView()
-        {
-            InitializeComponent();
+		public LoginView()
+		{
+			InitializeComponent();
 			DataContext = Application.Current.MainWindow.DataContext;
 		}
 
@@ -21,35 +22,33 @@ namespace WassupClient.Views
 		/// </summary>
 		private void btnLogin_Click(object sender, RoutedEventArgs e)
 		{
-			// Gets the registered users
-			var users = FileManager.GetUsers();
+			var user = (this.DataContext as Core).Login(tbUsername.Text, pbPassword.Password);
 
-			// If the user is already registered
-			if (users.Any(user => user.Username == tbUsername.Text && user.Password == pbPassword.Password))
+			// If login successful
+			if (user != null)
 			{
 				// Sets the user in the datacontext
-				(this.DataContext as Core).User = users.Single(x => x.Username.Equals(tbUsername.Text) && x.Password.Equals(pbPassword.Password));
-
+				(this.DataContext as Core).User = user;
 				// Changes view to Home
 				(this.DataContext as Core).ChangeView("Home");
 			}
 			else
 			{
 				// Wrong username or password
-				((this.DataContext as Core).SelectedViewModel as BaseViewModel).Error = "Username o password errati";
+				(this.DataContext as Core).Error = "Username o password errati";
 			}
 		}
 
 		private void tbUsername_GotFocus(object sender, RoutedEventArgs e)
 		{
-			if (((this.DataContext as Core).SelectedViewModel as BaseViewModel).Error != string.Empty)
-				((this.DataContext as Core).SelectedViewModel as BaseViewModel).Error = string.Empty;
+			if ((this.DataContext as Core).Error != string.Empty)
+				(this.DataContext as Core).Error = string.Empty;
 		}
 
 		private void pbPassword_GotFocus(object sender, RoutedEventArgs e)
 		{
-			if (((this.DataContext as Core).SelectedViewModel as BaseViewModel).Error != string.Empty)
-				((this.DataContext as Core).SelectedViewModel as BaseViewModel).Error = string.Empty;
+			if ((this.DataContext as Core).Error != string.Empty)
+				(this.DataContext as Core).Error = string.Empty;
 		}
 
 		private void OnLinkClick(object sender, RoutedEventArgs e)

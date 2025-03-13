@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Security.RightsManagement;
 using System.Text.Json;
 using WassupLib.Models;
 
@@ -35,7 +32,10 @@ namespace WassupLib.Managers
                 TcpClient client = _server.AcceptTcpClient();
 
                 if (client != null)
+                {
+                    Console.WriteLine("Client connesso");
                     new Thread(() => HandleClient(client)) { IsBackground = true }.Start();
+                }
             }
         }
 
@@ -48,13 +48,13 @@ namespace WassupLib.Managers
             {
                 while (true)
                 {
-                    int bytesRead = stream.Read(buffer, 0, buffer.Length);
+					int bytesRead = stream.Read(buffer, 0, buffer.Length);
 
-                    if (bytesRead == 0) break;
+                    if (bytesRead == 0) continue;
 
                     string jsonRequest = Encoding.ASCII.GetString(buffer, 0, bytesRead);
 
-                    var request = JsonSerializer.Deserialize<Command>(jsonRequest);
+                    var request = JsonSerializer.Deserialize<Request>(jsonRequest);
                     object response;
 
                     switch (request.Type.ToLower())
@@ -82,13 +82,14 @@ namespace WassupLib.Managers
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Errore nel client: {ex.Message}");
+                //Console.WriteLine($"Errore nel client: {ex.Message}");
             }
             finally
             {
                 stream.Close();
                 client.Close();
-            }
+				Console.WriteLine("Client disconnesso");
+			}
         }
 
         private void Respond(NetworkStream stream, object response)
@@ -104,21 +105,18 @@ namespace WassupLib.Managers
         /// Gets username and password & logs in user
         /// </summary>
         /// <returns>True if login succesful, otherwise false</returns>
-        public object LoginUser(string username, string password)
+        public Response LoginUser(string username, string password)
         {
 			// Gets the user
 			var user = FileManager.GetUsers().Find(x => x.Username == username && x.Password == password);
-            // Returns result & user if found
-            if (user != null) 
-				return new { result = true, user = user };
-			else
-				return new { result = false };
+			// Returns result & user if found
+			return new Response(user != null, user);
 		}
         /// <summary>
         /// Gets username and password & registers user
         /// </summary>
         /// <returns>True if register succesful, otherwise false</returns>
-        public object RegisterUser(string username, string password)
+        public Response RegisterUser(string username, string password)
         {
             // Gets users
             var users = FileManager.GetUsers();
@@ -130,15 +128,15 @@ namespace WassupLib.Managers
             {
                 // Creates the user
                 user = new User(username, password);
-				// Adds the user to the list
-				users.Add(user);
-				// Updates the db
-				FileManager.UpdateDb(users);
-				// Returns result
-				return new { result = true, user = user };
-			}
+                // Adds the user to the list
+                users.Add(user);
+                // Updates the db
+                FileManager.UpdateDb(users);
+                // Returns result
+                return new Response(true, user);
+            }
             else
-                return new { result = false };
+                return new Response(false, null);
 
 		}
         /// <summary>

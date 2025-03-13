@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using WassupLib.Managers;
 
 namespace WassupServer
 {
@@ -13,7 +6,7 @@ namespace WassupServer
     {
         public static void Main()
         {
-
+            var server = new TcpManagerServer();
         }
     }
 }
