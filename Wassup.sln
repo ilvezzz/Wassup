@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WassupClient", "WassupClient\WassupClient.csproj", "{4F7DFB03-B5E3-4ACF-8B2C-C6757E14F856}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F677B441-0D31-46D9-ABC0-14C05213FA9C} = {F677B441-0D31-46D9-ABC0-14C05213FA9C}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WassupLib", "WassupLib\WassupLib.csproj", "{F677B441-0D31-46D9-ABC0-14C05213FA9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WassupServer", "WassupServer\WassupServer.csproj", "{F253981F-1610-4E1F-B78C-51C6BF0F018B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F677B441-0D31-46D9-ABC0-14C05213FA9C} = {F677B441-0D31-46D9-ABC0-14C05213FA9C}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F7DFB03-B5E3-4ACF-8B2C-C6757E14F856}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F7DFB03-B5E3-4ACF-8B2C-C6757E14F856}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F7DFB03-B5E3-4ACF-8B2C-C6757E14F856}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F7DFB03-B5E3-4ACF-8B2C-C6757E14F856}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F677B441-0D31-46D9-ABC0-14C05213FA9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F677B441-0D31-46D9-ABC0-14C05213FA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F677B441-0D31-46D9-ABC0-14C05213FA9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F677B441-0D31-46D9-ABC0-14C05213FA9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F253981F-1610-4E1F-B78C-51C6BF0F018B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F253981F-1610-4E1F-B78C-51C6BF0F018B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F253981F-1610-4E1F-B78C-51C6BF0F018B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F253981F-1610-4E1F-B78C-51C6BF0F018B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AFD51EEC-4F9E-4446-867D-59C247229813}
+	EndGlobalSection
+EndGlobal

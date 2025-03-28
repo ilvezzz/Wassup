@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="WassupClient.Views.AccountView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WassupClient.Views" MinHeight="500" MinWidth="440">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="/Styles/Buttons.xaml"/>
+    </UserControl.Resources>
+
+    <Border Background="White">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+
+            <Grid Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Button Click="GoHome" Style="{StaticResource BackButtonStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" />
+
+                <TextBlock FontWeight="DemiBold" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center">Profilo</TextBlock>
+
+                <StackPanel Grid.Row="1" Width="400" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                    <Grid Width="380" Height="76" Margin="10,10,10,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock FontSize="18" Text="Username"/>
+                        <TextBox x:Name="tbUsername" FontSize="16" Height="30" Margin="0,0,20,0" />
+
+                        <TextBlock FontSize="18" Text="Password" Margin="20,0,0,0" Grid.Column="1"/>
+                        <PasswordBox x:Name="pbPassword" FontSize="16" Height="30" Margin="20,0,0,0" Grid.Column="1"/>
+
+                    </Grid>
+                    
+                    <TextBlock FontSize="18" Text="Foto" Width="150" Margin="0,10,0,0"/>
+                    <Image Name="imgProfile" Height="150" Width="150" Source="{Binding User.BitmapImage, Mode=OneTime}">
+                        <Image.Effect>
+                            <DropShadowEffect ShadowDepth="1" BlurRadius="10"/>
+                        </Image.Effect>
+                    </Image>
+                    <Button Name="btnEditImage" Style="{StaticResource PrimaryButtonStyle}" Width="100" Height="34" Click="EditImage" Cursor="Hand" Margin="0,16,0,0">Cambia</Button>
+
+                </StackPanel>
+
+            </Grid>
+
+            <Border Background="LightGray" Grid.Row="1">
+                <Button Name="btnSave" Style="{StaticResource PrimaryButtonStyle}" Width="130" Click="SaveAccount" Cursor="Hand">Salva</Button>
+            </Border>
+
+        </Grid>
+    </Border>
+    
+</UserControl>
