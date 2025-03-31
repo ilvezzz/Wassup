@@ -97,7 +97,7 @@ namespace WassupLib.Managers
 								break;
 						}
 					}
-					catch (Exception ex)
+					catch (Exception)
 					{
 						//Console.WriteLine($"Errore nel client: {ex.Message}");
 					}

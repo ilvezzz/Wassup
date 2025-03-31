@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using WassupLib.Models;
 
 namespace WassupLib.Managers
@@ -31,6 +32,7 @@ namespace WassupLib.Managers
 
 			if (!_client.Connected || _stream == null)
 				throw new Exception("Errore durante la connessione al server TCP");
+			
 		}
 
 		public void Connect()

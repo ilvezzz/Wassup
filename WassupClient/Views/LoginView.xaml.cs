@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
-using WassupClient.ViewModels;
 using WassupLib;
 using WassupLib.Managers;
 using WassupLib.Models;

@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Dynamic;
 using System.Windows;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace WassupClient
 {
@@ -127,8 +128,16 @@ namespace WassupClient
 
 		public Core()
 		{
-			// Creates tcp client
-			tcp = new TcpManagerClient();
+			try
+			{
+				// Creates tcp client
+				tcp = new TcpManagerClient();
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Impossibile connettersi al server, verificare che sia acceso.\r\n\r\n" + ex.Message, "Errore client", MessageBoxButton.OK, MessageBoxImage.Error);
+				Environment.Exit(0);
+			}
 		}
 
 		public void LoadFirstView()
